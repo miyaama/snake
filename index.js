@@ -23,6 +23,9 @@ let yVelocity = 0;
 let appleX = 5;
 let appleY = 5;
 
+let inputsXVelocity = 0;
+let inputsYVelocity = 0;
+
 let score = 0;
 
 let prevXVelocity = 0;
@@ -31,6 +34,9 @@ let prevYVelocity = 0;
 let GREEN = "#223700";
 
 function drawGame() {
+  xVelocity = inputsXVelocity;
+  yVelocity = inputsYVelocity;
+
   if (prevXVelocity === 1 && xVelocity === -1) {
     xVelocity = prevXVelocity;
   }
@@ -53,6 +59,7 @@ function drawGame() {
   changeSnakePosition();
   let result = isGameOver();
   if (result) {
+    document.body.removeEventListener("keydown", keyDown);
     return;
   }
 
@@ -100,9 +107,9 @@ function isGameOver() {
   }
 
   if (gameOver) {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = 'white';
     ctx.font = "50px Verdana";
-    ctx.fillText("Game Over!", canvas.width / 6.5, canvas.height / 2);
+    ctx.fillText("Game Over", canvas.width / 6.5, canvas.height / 2);
   }
 
   return gameOver;
@@ -158,23 +165,23 @@ document.body.addEventListener("keydown", keyDown);
 
 function keyDown(e) {
   if (e.keyCode == 38) {
-    yVelocity = -1;
-    xVelocity = 0;
+    inputsYVelocity = -1;
+    inputsXVelocity = 0;
   }
 
   if (e.keyCode == 40) {
-    yVelocity = 1;
-    xVelocity = 0;
+    inputsYVelocity = 1;
+    inputsXVelocity = 0;
   }
 
   if (e.keyCode == 37) {
-    yVelocity = 0;
-    xVelocity = -1;
+    inputsYVelocity = 0;
+    inputsXVelocity = -1;
   }
 
   if (e.keyCode == 39) {
-    yVelocity = 0;
-    xVelocity = 1;
+    inputsYVelocity = 0;
+    inputsXVelocity = 1;
   }
 }
 
